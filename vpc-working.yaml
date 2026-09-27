@@ -1,3 +1,7 @@
+# Description: Create VPC-aarsno0186 with three subnets in distinct Availability Zones in us-west-2.
+# Revision: 1.0
+# Date: 2026-09-27
+
 AWSTemplateFormatVersion: '2010-09-09'
 Description: VPC-aarsno0186 with three subnets in distinct Availability Zones. Deploy in us-west-2.
 
