@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: VPC-aarsno0186 with three subnets in distinct Availability Zones. Deploy in us-west-2.
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: VPC-aarsno0186
+
+  Subnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone:
+        Fn::Select:
+          - 0
+          - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+          Value: VPC-aarsno0186-subnet-1
+
+  Subnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone:
+        Fn::Select:
+          - 1
+          - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+          Value: VPC-aarsno0186-subnet-2
+
+  Subnet3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.3.0/24
+      AvailabilityZone:
+        Fn::Select:
+          - 2
+          - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+          Value: VPC-aarsno0186-subnet-3
+
+Outputs:
+  VPCId:
+    Description: ID of VPC-aarsno0186
+    Value: !Ref VPC
+  Subnet1Id:
+    Description: ID of the first subnet
+    Value: !Ref Subnet1
+  Subnet2Id:
+    Description: ID of the second subnet
+    Value: !Ref Subnet2
+  Subnet3Id:
+    Description: ID of the third subnet
+    Value: !Ref Subnet3
